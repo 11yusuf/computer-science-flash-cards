@@ -8,7 +8,7 @@ app.config.from_object(__name__)
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'db', 'cards.db'),
+    DATABASE=os.path.join(app.root_path, 'db', 'jawshamCards.db'),
     SECRET_KEY='development key',
     USERNAME='admin',
     PASSWORD='default'
@@ -260,9 +260,9 @@ def login():
     error = None
     if request.method == 'POST':
         if request.form['username'] != app.config['USERNAME']:
-            error = 'Invalid username or password!'
+            error = app.config['USERNAME']
         elif request.form['password'] != app.config['PASSWORD']:
-            error = 'Invalid username or password!'
+            error = app.config['PASSWORD']
         else:
             session['logged_in'] = True
             session.permanent = True  # stay logged in
